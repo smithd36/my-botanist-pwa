@@ -35,7 +35,7 @@ export default function Header() {
           </button>
         </div>
         <ul className={`flex flex-col space-y-4 p-4 ${isOpen ? 'block' : 'hidden'} lg:flex lg:flex-row lg:items-center lg:space-x-4 lg:p-0`}>
-          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:text-green-600">Home</a></li>
+          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:text-green-600">Login/Sign Up</a></li>
           <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Plants</a></li>
           <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Research</a></li>
           <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Account</a></li>
