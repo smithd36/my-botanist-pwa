@@ -23,9 +23,16 @@ export async function POST(req: NextRequest) {
 
       // Add cookie
       const response = NextResponse.json(createdUser, { status: 201 });
-      response.cookies.set('token', token, { httpOnly: true, secure: true, maxAge: 3600 });
+      response.cookies.set('token', token, { 
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === 'development' ? false : true, 
+        sameSite: 'strict', 
+        maxAge: 3600 
+      });
+      return response;
+    } else {
+      return NextResponse.json({ error: 'User creation failed' }, { status: 500 });
     }
-
   } catch (error: any) {
     console.error('Error creating user:', error.message);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

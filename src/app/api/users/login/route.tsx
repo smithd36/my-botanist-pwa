@@ -3,7 +3,6 @@ import { getUserByEmail } from '@/utils/db';
 import { comparePassword } from '@/utils/hash';
 import { signToken } from '@/utils/jwt';
 import { UserCredentials } from '@/types';
-import { MyJWTPayload } from '@/types/jwt';
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,12 +27,15 @@ export async function POST(req: NextRequest) {
     }
 
     if (user && user.id) {
-      const payload: MyJWTPayload = { email: user.email, id: user.id.toString() };
-      const token = await signToken(payload);
+      const token = await signToken({ email: user.email, id: user.id.toString() });
 
-      const response = NextResponse.json(user, { status: 200 });
-      response.cookies.set('token', token, { httpOnly: true, secure: true, maxAge: 3600 });
-
+      const response = NextResponse.json({ message: 'Login successful' }, { status: 200 });
+      response.cookies.set('token', token, { 
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === 'production', 
+        sameSite: 'strict', 
+        maxAge: 3600 
+      });
       return response;
     }
   } catch (error: any) {

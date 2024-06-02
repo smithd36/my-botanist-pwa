@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { register } from '@/utils/auth';
+import { NextResponse } from 'next/server';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -18,17 +19,17 @@ export default function Register() {
       setError('Passwords do not match');
       return;
     }
-    try {
-      const response = await register(email, password);
-      if (response.message) {
-        router.push('/plants'); // Redirect to first protected route
-      } else {
-        throw new Error(response.error);
+      try {
+        const response = await register(email, password);
+        if (response) {
+          router.push("/plants"); // Redirect to first protected route
+        } else {
+          throw new Error(response.error);
+        }
+      } catch (error: any) {
+        setError(error.message);
       }
-    } catch (error: any) {
-      setError(error.message);
-    }
-  }
+    };
 
   return (
       <main className="font-mono flex min-h-screen flex-col items-center justify-between p-4">
@@ -117,7 +118,7 @@ export default function Register() {
               </a>
             </p>
             <p className="text-gray-500 text-center text-xs mt-4">
-              Botany is always free and secure. By creating an account, you are automatically gaining access to all features Botany
+              Botanist is always free and secure. By creating an account, you are automatically gaining access to all features Botany
               currently has, or will ever release. Albeit upsetting to have to even say; Your data won't be sold and will only ever be
               disclosed to you.
             </p>

@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { MyJWTPayload } from '@/types/jwt';
 
-const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY || 'your-secret-key');
+const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
 
 export async function signToken(payload: MyJWTPayload, expiresIn: string = '1h'): Promise<string> {
   const token = await new SignJWT(payload)

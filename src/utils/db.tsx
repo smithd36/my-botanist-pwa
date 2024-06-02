@@ -3,7 +3,7 @@ import { User } from '@/types';
 
 export async function createUser(user: User): Promise<User> {
   const db = await openDb();
-  const result = await db.run('INSERT INTO users (email, password) VALUES (?, ?, ?)', [
+  const result = await db.run('INSERT INTO users (email, password, date_created) VALUES (?, ?, ?)', [
     user.email,
     user.password,
   ]);

@@ -1,27 +1,23 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
-import { TextDecoder } from 'util';
 
 export const authRoutes = ['/login', '/register'];
 const protectedRoutes = ['/account', '/research', '/plants'];
-const publicRoutes = ['/'];
 
-const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY || 'your-secret-key');
+const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+
+async function verifyToken(token: string) {
+  try {
+    const { payload } = await jwtVerify(token, secretKey);
+    return payload;
+  } catch (e) {
+    return null;
+  }
+}
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
-
-  // Function to verify JWT token
-  const verifyToken = async (token: string) => {
-    try {
-      const { payload } = await jwtVerify(token, secretKey);
-      return payload;
-    } catch (e) {
-      return null;
-    }
-  };
-
   const currentUser = token ? await verifyToken(token) : null;
 
   // If the route is protected and the user is not authenticated
@@ -44,5 +40,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login', '/register', '/account', '/research', '/plants'], // Add other routes as needed
+  matcher: ['/login', '/register', '/account', '/research', '/plants'],
 };
