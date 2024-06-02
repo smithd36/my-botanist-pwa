@@ -1,15 +1,31 @@
-import Header from "@/components/header";
-import Image from "next/image";
+'use client';
 
-export default function Index() {
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+
+export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // Redirect to dashboard or another page
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <Header />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="logo-512x512.png"
+            src="/logo-512x512.png"
             alt="Botanist Logo"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white-900">
@@ -18,7 +34,8 @@ export default function Index() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-white-900">
                 Email address
@@ -30,6 +47,8 @@ export default function Index() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="text-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   placeholder="me@example.com"
                 />
@@ -54,6 +73,8 @@ export default function Index() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="1d0x3K$*Q(@"
                   className="text-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 />

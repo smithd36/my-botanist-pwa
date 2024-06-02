@@ -1,10 +1,30 @@
-import Header from "@/components/header";
-import Image from "next/image";
+'use client';
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 
 export default function CreateAccount() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      // Redirect to dashboard or another page
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <Header />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -18,7 +38,7 @@ export default function CreateAccount() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-white-900">
                 Email address
@@ -73,7 +93,7 @@ export default function CreateAccount() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
                 Create Account
               </button>
             </div>
