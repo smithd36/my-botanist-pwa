@@ -18,7 +18,7 @@ export async function createUser(user: User): Promise<User> {
 
 export async function getUserByEmail(email: string): Promise<User | undefined> {
   const db = await openDb();
-  const row = await db.get('SELECT * FROM users WHERE email = ?', email);
+  const row = await db.get('SELECT * FROM users WHERE email = ?', [email]);
 
   if (!row) return undefined;
 
@@ -30,5 +30,11 @@ export async function getUserByEmail(email: string): Promise<User | undefined> {
     date_created: row.date_created,
   };
 
+  return user;
+}
+
+export async function getUserById(id: string): Promise<User | null> {
+  const db = await openDb();
+  const user = await db.get('SELECT * FROM users WHERE id = ?', [id]);
   return user;
 }

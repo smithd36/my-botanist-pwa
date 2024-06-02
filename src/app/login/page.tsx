@@ -2,27 +2,26 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/utils/auth";
+import { useAuth } from "@/context/AuthContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     try {
-      const response = await login(email, password);
-      if (response) {
-        router.push("/plants"); // Redirect to first protected route
-      } else {
-        throw new Error(response.error);
-      }
+      await login(email, password);
+      // Redirect to the home page or dashboard after successful login
+      router.push("/plants");
     } catch (error: any) {
       setError(error.message);
     }
   };
+
   return (
       <main className="font-mono flex min-h-screen flex-col items-center justify-between p-4">
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

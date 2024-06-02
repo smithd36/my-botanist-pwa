@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUser } from '@/utils/db';
 import { hashPassword } from '@/utils/hash';
-import { User } from '@/types';
+import { User } from '@/types/auth';
 import { MyJWTPayload } from '@/types/jwt';
 import { signToken } from '@/utils/jwt';
 
@@ -22,14 +22,16 @@ export async function POST(req: NextRequest) {
       const token = await signToken(payload);
 
       // Add cookie
-      const response = NextResponse.json(createdUser, { status: 201 });
+      const response = NextResponse.json({
+        user: { createdUser }
+      }, { status: 200 });
+
       response.cookies.set('token', token, { 
         httpOnly: true, 
-        secure: process.env.NODE_ENV === 'development' ? false : true, 
+        secure: process.env.NODE_ENV === 'production' ? false : true, 
         sameSite: 'strict', 
         maxAge: 3600 
       });
-      return response;
     } else {
       return NextResponse.json({ error: 'User creation failed' }, { status: 500 });
     }

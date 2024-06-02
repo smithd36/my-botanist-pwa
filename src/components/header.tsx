@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Header() {
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -11,7 +13,9 @@ export default function Header() {
 
   return (
     <header className="font-mono shadow-md py-4 px-4 sm:px-10 w-full fixed top-0 left-0 z-50 flex items-center justify-between">
-      <div className="text-lg font-semibold">Welcome.</div>
+      <div className="text-lg font-semibold">
+        {user ? `Hello, ${user.name || user.email}.` : 'Hello.'}
+      </div>
       <div className="lg:hidden">
         <button
           onClick={toggleMenu}

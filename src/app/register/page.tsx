@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { register } from '@/utils/auth';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Page() {
   const [name, setName] = useState('');
@@ -11,6 +11,7 @@ export default function Page() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { register } = useAuth();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -20,12 +21,8 @@ export default function Page() {
       return;
     }
       try {
-        const response = await register(name, email, password);
-        if (response) {
-            router.push("/plants"); // Redirect to first protected route
-        } else {
-          throw new Error(response.error);
-        }
+        await register(name, email, password);
+        router.push("/plants"); // Redirect to first protected route
       } catch (error: any) {
         setError(error.message);
       }
