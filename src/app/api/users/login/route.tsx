@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserByEmail } from '@/utils/db';
 import { comparePassword } from '@/utils/hash';
+import { signToken } from '@/utils/jwt';
 import { UserCredentials } from '@/types';
+import { MyJWTPayload } from '@/types/jwt';
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,8 +14,6 @@ export async function POST(req: NextRequest) {
       console.error('User not found:', email);
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
-
-    console.log('User:', user);
 
     if (!user.password) {
       console.error('Hashed Password is undefined for user:', email);
@@ -27,10 +27,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    // Create a simple token or session (this is a placeholder, use a proper JWT or session management in production)
-    const token = 'fake-jwt-token'; // Replace with actual token generation logic
+    if (user && user.id) {
+      const payload: MyJWTPayload = { email: user.email, id: user.id.toString() };
+      const token = await signToken(payload);
 
-    return NextResponse.json({ message: 'Login successful', token }, { status: 200 });
+      const response = NextResponse.json(user, { status: 200 });
+      response.cookies.set('token', token, { httpOnly: true, secure: true, maxAge: 3600 });
+
+      return response;
+    }
   } catch (error: any) {
     console.error('Error during login:', error.message);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

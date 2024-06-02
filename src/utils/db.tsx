@@ -1,17 +1,20 @@
 import { openDb } from '@/db/sqlite';
 import { User } from '@/types';
 
-export const createUser = async (user: User) => {
+export async function createUser(user: User): Promise<User> {
   const db = await openDb();
-  await db.run('INSERT INTO users (email, password, date_created) VALUES (?, ?, ?)', [
+  const result = await db.run('INSERT INTO users (email, password) VALUES (?, ?, ?)', [
     user.email,
     user.password,
-    user.date_created
   ]);
-  console.log(`User created: ${user.email}`);
-};
+  
+  return {
+    id: result.lastID,
+    ...user,
+  };
+}
 
-export const getUserByEmail = async (email: string): Promise<User | undefined> => {
+export async function getUserByEmail(email: string): Promise<User | undefined> {
   const db = await openDb();
   const row = await db.get('SELECT * FROM users WHERE email = ?', email);
 
@@ -24,6 +27,5 @@ export const getUserByEmail = async (email: string): Promise<User | undefined> =
     date_created: row.date_created,
   };
 
-  console.log(`User: ${JSON.stringify(user)}`);
   return user;
-};
+}

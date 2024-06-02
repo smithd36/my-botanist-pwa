@@ -35,11 +35,10 @@ export default function Header() {
           </button>
         </div>
         <ul className={`flex flex-col space-y-4 p-4 ${isOpen ? 'block' : 'hidden'} lg:flex lg:flex-row lg:items-center lg:space-x-4 lg:p-0`}>
-          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:text-green-600">Login/Sign Up</a></li>
-          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Plants</a></li>
-          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Research</a></li>
-          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Account</a></li>
-          <li><a href="#" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">Contact Devs</a></li>
+          <li><a href="/login" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:text-green-600">Login or Sign Up</a></li>
+          <li><a href="/plants" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Plants</a></li>
+          <li><a href="/research" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Research</a></li>
+          <li><a href="/account" className="rounded-lg block px-4 py-2 text-green-500 hover:bg-green-600 lg:hover:bg-transparent lg:hover:text-green-600">My Account</a></li>
         </ul>
       </nav>
     </header>
