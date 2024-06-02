@@ -5,7 +5,7 @@ import { jwtVerify } from 'jose';
 export const authRoutes = ['/login', '/register'];
 const protectedRoutes = ['/account', '/research', '/plants'];
 
-const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+const secretKey = new TextEncoder().encode(process.env.JWT_SECRET_KEY || 'your-secret-key');
 
 async function verifyToken(token: string) {
   try {

@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { register } from '@/utils/auth';
-import { NextResponse } from 'next/server';
 
-export default function Register() {
+export default function Page() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,9 +20,9 @@ export default function Register() {
       return;
     }
       try {
-        const response = await register(email, password);
+        const response = await register(name, email, password);
         if (response) {
-          router.push("/plants"); // Redirect to first protected route
+            router.push("/plants"); // Redirect to first protected route
         } else {
           throw new Error(response.error);
         }
@@ -44,6 +44,25 @@ export default function Register() {
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" onSubmit={handleSubmit}>
               {error && <p className="text-red-500 text-sm">{error}</p>}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium leading-6 text-white-900">
+                  Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                    placeholder="house doggo"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-white-900">
                   Email address
@@ -110,7 +129,6 @@ export default function Register() {
                 </button>
               </div>
             </form>
-
             <p className="mt-10 text-center text-sm text-gray-500">
               Already have an account?{' '}
               <a href="/login" className="font-semibold leading-6 text-green-600 hover:text-green-500">

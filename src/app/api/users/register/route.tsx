@@ -7,18 +7,18 @@ import { signToken } from '@/utils/jwt';
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const { name, email, password } = await req.json();
 
     // Hash the password before storing
     const hashedPassword = await hashPassword(password);
 
     // Create the user in the database
-    const newUser: User = { email, password: hashedPassword, date_created: new Date().toISOString() };
+    const newUser: User = { name, email, password: hashedPassword, date_created: new Date().toISOString() };
     const createdUser = await createUser(newUser);
 
     if (createdUser && createdUser.id) {
       // JWT
-      const payload: MyJWTPayload = { email: createdUser.email, id: createdUser.id.toString() };
+      const payload: MyJWTPayload = { name: createdUser.name, email: createdUser.email, id: createdUser.id.toString() };
       const token = await signToken(payload);
 
       // Add cookie

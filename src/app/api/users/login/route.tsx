@@ -14,11 +14,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    if (!user.password) {
-      console.error('Hashed Password is undefined for user:', email);
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
-
     const isValidPassword = await comparePassword(password, user.password);
 
     if (!isValidPassword) {
@@ -27,16 +22,20 @@ export async function POST(req: NextRequest) {
     }
 
     if (user && user.id) {
-      const token = await signToken({ email: user.email, id: user.id.toString() });
+      const payload = { email: user.email, id: user.id.toString() };
+      const token = await signToken(payload);
 
       const response = NextResponse.json({ message: 'Login successful' }, { status: 200 });
       response.cookies.set('token', token, { 
         httpOnly: true, 
         secure: process.env.NODE_ENV === 'production', 
         sameSite: 'strict', 
+        path: '/', 
         maxAge: 3600 
       });
-      return response;
+    return response;
+    } else {
+      return NextResponse.json({ error: 'Login failed' }, { status: 500 });
     }
   } catch (error: any) {
     console.error('Error during login:', error.message);
