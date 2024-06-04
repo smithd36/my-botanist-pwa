@@ -14,17 +14,17 @@ export async function POST(req: NextRequest) {
 
     // Create the user in the database
     const newUser: User = { name, email, password: hashedPassword, date_created: new Date().toISOString() };
-    const createdUser = await createUser(newUser);
 
-    if (createdUser && createdUser.id) {
+    // user.id appends after creation
+    const user = await createUser(newUser);
+
+    if (user && user.id) {
       // JWT
-      const payload: MyJWTPayload = { name: createdUser.name, email: createdUser.email, id: createdUser.id.toString() };
+      const payload: MyJWTPayload = { name: user.name, email: user.email, id: user.id.toString() };
       const token = await signToken(payload);
 
       // Add cookie
-      const response = NextResponse.json({
-        user: { createdUser }
-      }, { status: 200 });
+      const response = NextResponse.json({ user }, { status: 200 });
 
       response.cookies.set('token', token, { 
         httpOnly: true, 
@@ -32,6 +32,8 @@ export async function POST(req: NextRequest) {
         sameSite: 'strict', 
         maxAge: 3600 
       });
+
+      return response;
     } else {
       return NextResponse.json({ error: 'User creation failed' }, { status: 500 });
     }

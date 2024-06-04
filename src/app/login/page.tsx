@@ -100,7 +100,7 @@ const LoginPage = () => {
               </a>
               <br /><br />
             </p>
-            <p className="text-gray-500 text-center text-xs">Botanist is always free, open-source and secure. By creating an account, you are automatically gaining access to all features Botany currently has, or will ever release. Albeit upsetting to have to even say; Your data won't be sold and will only ever be disclosed to you.</p>
+            <p className="text-gray-500 text-center text-xs">My Botanist is always free, open-source and secure. By creating an account, you are automatically gaining access to all current and future features. Your data won't be sold to anyone and will only ever be disclosed to you.</p>
           </div>
         </div>
       </main>

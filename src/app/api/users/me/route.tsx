@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    return NextResponse.json(user, { status: 200 });
+    return NextResponse.json({ user } , { status: 200 });
   } catch (error: any) {
     console.error('Error verifying token:', error.message);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

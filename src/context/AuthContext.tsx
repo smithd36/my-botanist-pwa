@@ -21,7 +21,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (token) {
       axiosInstance.get('/users/me')
         .then(response => {
-          setUser(response.data);
+          setUser(response.data.user);
           router.push('/plants'); // Redirect to /plants if user is authenticated
         })
         .catch(error => {
