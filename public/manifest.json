@@ -1,6 +1,7 @@
 {
-    "name": "Botanist",
-    "short_name": "Free app for Plant lovers to centralize their personal plant tracking, management and research.",
+    "name": "My Botanist",
+    "short_name": "My Botanist",
+    "description": "Free app for Plant lovers to centralize their personal plant tracking, management and research.",
     "icons": [
     {
         "src": "/logo-192x192.png",
@@ -19,8 +20,8 @@
         "type": "image/png"
     }
     ],
-    "theme_color": "#FFFFFF",
-    "background_color": "#FFFFFF",
+    "theme_color": "#836953",
+    "background_color": "#836953",
     "start_url": "/",
     "display": "standalone",
     "orientation": "portrait"

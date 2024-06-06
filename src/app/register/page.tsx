@@ -54,8 +54,7 @@ export default function Page() {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                    placeholder="house doggo"
+                    className="bg-soft-dirt text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -73,8 +72,7 @@ export default function Page() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                    placeholder="theDogsSecretEmailAddress@example.com"
+                    className="bg-soft-dirt text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -92,8 +90,7 @@ export default function Page() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="iamagoodboy1234"
-                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                    className="bg-soft-dirt text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -111,8 +108,7 @@ export default function Page() {
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="iamagoodboy1234"
-                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                    className="bg-soft-dirt text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -120,7 +116,7 @@ export default function Page() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                  className="flex w-full justify-center rounded-md bg-muted-leaf px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-muted-leaf-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-muted-leaf-hover transition-colors duration-300 ease-in-out"
                 >
                   Create Account
                 </button>
@@ -132,7 +128,7 @@ export default function Page() {
                 Sign in here
               </a>
             </p>
-            <p className="text-gray-500 text-center text-xs">My Botanist is always free, open-source and secure. By creating an account, you are automatically gaining access to all current and future features. Your data won't be sold to anyone and will only ever be disclosed to you.</p>
+            <p className="bg-soft-dirt text-center text-xs">My Botanist is always free, open-source and secure. By creating an account, you are automatically gaining access to all current and future features. Your data won't be sold to anyone and will only ever be disclosed to you.</p>
           </div>
         </div>
       </main>

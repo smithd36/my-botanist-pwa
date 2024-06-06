@@ -69,6 +69,9 @@ export default function Page() {
   };
 
  return (
-  <HorizontalMenu plants={['PLANTS1', 'plants2', 'plants3', 'plants4','PLANTS1', 'plants2', 'plants3', 'plants4','PLANTS1', 'plants2', 'plants3', 'plants4']} onSelect={plant => console.log('Selected plant:', plant)} />
+  <main>
+    <HorizontalMenu plants={['PLANTS1', 'plants2', 'plants3', 'plants4','PLANTS1', 'plants2', 'plants3', 'plants4','PLANTS1', 'plants2', 'plants3', 'plants4']} onSelect={plant => console.log('Selected plant:', plant)} />
+    
+  </main>
   );
 }

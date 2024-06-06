@@ -13,7 +13,7 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ plants, onSelect }) => 
                 {plants.map(plant => (
                     <a
                         key={plant}
-                        className="text-lg px-2 py-2 cursor-pointer hover:bg-gray-200"
+                        className="text-lg px-2 py-2 cursor-pointer hover:bg-soft-dirt-hover hover:text-white rounded-lg transition-colors duration-300 ease-in-out"
                         onClick={() => onSelect(plant)}
                     >
                         {plant.toLowerCase()}

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
-const LoginPage = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +40,7 @@ const LoginPage = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               {error && <p className="text-red-500 text-sm">{error}</p>}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-white-900">
+                <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
                   Email address
                 </label>
                 <div className="mt-2">
@@ -52,19 +52,18 @@ const LoginPage = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                    placeholder="me@example.com"
+                    className="bg-soft-dirt text-xs block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-warm-gray focus:ring-2 focus:ring-inset focus:ring-muted-leaf sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
 
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-white-900">
+                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
                     Password
                   </label>
                   <div className="text-sm">
-                    <a href="#" className="font-semibold text-green-600 hover:text-green-500">
+                    <a href="#" className="font-semibold text-muted-leaf hover:text-muted-leaf-hover">
                       Forgot password?
                     </a>
                   </div>
@@ -78,8 +77,7 @@ const LoginPage = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="1d0x3K$*Q(@"
-                    className="bg-black text-xs block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                    className="bg-soft-dirt text-xs block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-warm-gray focus:ring-2 focus:ring-inset focus:ring-muted-leaf sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -87,24 +85,24 @@ const LoginPage = () => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                  className="flex w-full justify-center rounded-md bg-muted-leaf px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-muted-leaf-hober focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-muted-leaf">
                   Sign in
                 </button>
               </div>
             </form>
 
-            <p className="mt-10 text-center text-sm text-gray-500">
+            <p className="mt-10 text-center text-sm text-warm-gray">
               No account?{' '}
-              <a href="/register" className="font-semibold leading-6 text-green-600 hover:text-green-500">
+              <a href="/register" className="font-semibold leading-6 text-muted-leaf hover:text-muted-leaf-hover">
                 Create one here
               </a>
               <br /><br />
             </p>
-            <p className="text-gray-500 text-center text-xs">My Botanist is always free, open-source and secure. By creating an account, you are automatically gaining access to all current and future features. Your data won't be sold to anyone and will only ever be disclosed to you.</p>
+            <p className="text-warm-gray text-center text-xs">My Botanist is always free, open-source and secure. By creating an account, you are automatically gaining access to all current and future features. Your data won't be sold to anyone and will only ever be disclosed to you.</p>
           </div>
         </div>
       </main>
   );
 }
 
-export default LoginPage;
+export default Login;

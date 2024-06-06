@@ -4,6 +4,31 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 158, 120, 97; /* Dirt brown RGB */
+  --background-end-rgb: 158, 120, 97; /* Dirt brown RGB */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 158, 120, 97; /* Dirt brown RGB for dark mode */
+    --background-end-rgb: 158, 120, 97; /* Dirt brown RGB for dark mode */
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb)); /* Updated to use solid color */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+/**
+:root {
+  --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
@@ -31,3 +56,4 @@ body {
     text-wrap: balance;
   }
 }
+*/
