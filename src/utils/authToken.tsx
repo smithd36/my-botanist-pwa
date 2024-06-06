@@ -15,4 +15,4 @@ export function getAuthToken() {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('authToken');
     }
-  }  
+}

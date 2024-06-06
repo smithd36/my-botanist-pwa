@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Plant } from '@/types/plant';
+import HorizontalMenu from '@/components/HorizontalMenu';
+import ThreeDButton from '@/components/ThreeDButton';
 
 export default function Page() {
   /**
@@ -59,14 +61,14 @@ export default function Page() {
     </div>
   );
   */
+
+  const handleAddPlant = () => {
+    console.log('Add plant button clicked');
+
+    // Bring up the search window to find a plant?
+  };
+
  return (
-    <div>
-      <h1>Plants</h1>
-      <ul>
-        <li>Plant 1</li>
-        <li>Plant 2</li>
-        <li>Plant 3</li>
-      </ul>
-    </div>
+  <HorizontalMenu plants={['PLANTS1', 'plants2', 'plants3', 'plants4','PLANTS1', 'plants2', 'plants3', 'plants4','PLANTS1', 'plants2', 'plants3', 'plants4']} onSelect={plant => console.log('Selected plant:', plant)} />
   );
 }
